@@ -1,18 +1,29 @@
-num1 = float(input("Enter a number: "))
-op = (input("Enter an operation: "))
-num2 = float(input("Enter another number: "))
-if op == "*":   
-    print(num1 * num2)
-elif op == "/":
-    print(num1 / num2)
-elif op == "+":
-    print(num1 + num2)
-elif op == "-":
-    print(num1 - num2)
-elif op == "^":
-    print(num1 ** num2)
-else:
-    print("error, you did not enter a supported operation")
+import tkinter as tk
+from tkinter import simpledialog
+from tkinter import messagebox
+from tkinter import *
+application_window = tk.Tk()
+while True:
+    num1 = simpledialog.askfloat('ask',"Enter a number",
+                                    parent=application_window,)
+    op = simpledialog.askstring('ask',"Enter a operation",
+                                    parent=application_window,)
+    num2 = simpledialog.askfloat('ask',"Enter another number",
+                                    parent=application_window,)
+    if op == "*":   
+        messagebox.showinfo("answer",num1 * num2)
+    elif op == "/":
+        messagebox.showinfo("answer",num1 / num2)
+    elif op == "+":
+        messagebox.showinfo("answer",num1 + num2)
+    elif op == "-":
+        messagebox.showinfo("answer",num1 - num2)
+    elif op == "^":
+        messagebox.showinfo("answer",num1 ** num2)
+    elif op == "**":
+        messagebox.showinfo("answer",num1 ** num2)
+    else:
+        messagebox.showerror("error","THAT IS NOT AN OPERATION!")
 
 
 

@@ -10,19 +10,23 @@ mydict = {
    "How much do the apple wheels cost?":"$700 dollars",
    "Who is the richest man in the world?":"jeff bezos"
 }
+print('tpe hint to get a hint')
 length = len(mydict)
 print(str(length)+' question game')
 i = 0
 correct = 0
+ch = False
 while i < length:
     #select question
     question = (list(mydict.keys())[count])
-    print(Fore.BLUE+"question: "+str(question))
+    if ch == False:
+        print(Fore.BLUE+"question: "+str(question))
+    ch = False
     #ask for guess
     guess = (input(Fore.YELLOW+'guess: '))
     guess = guess.lower()
     #check for keys value
-    answer = (list(mydict.values())[count])
+    anwser = (list(mydict.values())[count])
     hint = len(answer)/3
     hint = int(hint)
     take = answer[0:hint]
@@ -32,6 +36,10 @@ while i < length:
         print(Fore.GREEN+'correct')
         count+=1
         i +=1 
+    #hint?
+    elif guess == 'hint':
+        print(Fore.BLUE+take)
+        ch = True
         #wrong
 
     else:

@@ -1,6 +1,6 @@
 from random import randint
 # Here I am setting two list for each number generated
-for i in range(4):
+for i in range(2):
     two = []
     one = []
     #these list are for later when I find out how many two's and one's were generated in each session
@@ -8,14 +8,14 @@ for i in range(4):
     final1 = []
     final2 = []
     #this process will reapeat five times
-    for i in range(2):
+    for i in range(5):
         one.clear()
         two.clear()
         # I need to to clear the list so they dont add up
         #Here we will choose a number either 1 or 2 ten times. If 1 chosen it will be appended to list one. 
         #If 2 is chosen it will be appended to list 2
         #There are 5 sessions of this.
-        for i in range(10):
+        for i in range(1000):
             num = randint(1,2)
             if num == 1:
                 one.append(num)

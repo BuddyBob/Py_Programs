@@ -15,7 +15,7 @@ for i in range(4):
         #Here we will choose a number either 1 or 2 ten times. If 1 chosen it will be appended to list one. 
         #If 2 is chosen it will be appended to list 2
         #There are 5 sessions of this.
-        for i in range(2):
+        for i in range(10):
             num = randint(1,2)
             if num == 1:
                 one.append(num)

@@ -1,10 +1,14 @@
-from tkinter import *
-from tkinter import simpledialog
-from tkinter import messagebox
 import os
-import time
 import shutil
+import time
+from tkinter import *
+from tkinter import messagebox, simpledialog
+
 tk = Tk()
+master = Tk()
+OPTIONS = ['rename','delete','move']
+variable = StringVar(tk)
+variable.set(OPTIONS[0])
 def setFilePath():
     good = False
     while good == False:
@@ -31,11 +35,8 @@ def massFile():
         folder = simpledialog.askstring('Folder',str('Choose a folder'),parent=tk)
         total = filePath+str('/')+folder
         if os.path.isdir(total):
-            if variable== OPTIONS[0]:
-                print('gi')
-                good = TRUE
-            else:
-                print('hi')
+            menuDrop = OptionMenu(master,variable,*OPTIONS)
+            menuDrop.pack()
         else:
             messagebox.showerror(title="No such directory", message="We could not find that folder")
 def deleteFolder():
@@ -69,22 +70,16 @@ def moveFile():
         else:
             messagebox.showerror(title="No such file", message="There is no such file in that directory")
 
-
-
-OPTIONS = ['rename','delete','move']
-variable = StringVar(tk)
-variable.set(OPTIONS[0])
 tk.geometry("300x600")
 setDefaultPath = Button(tk,height = 10, width = 20, text='Set Default File Path',command = setFilePath)
 deleteFiles = Button(tk,height = 5, width = 20, text='Delete File',command = deleteFile)
 massFiles = Button(tk,height = 5, width = 20, text='Mass File Change',command = massFile)
 deleteFolders = Button(tk,height = 5, width = 20, text='Delete Folder',command = deleteFolder)
 moveFiles = Button(tk,height = 5, width = 20, text='Move File',command = moveFile)
-menuDrop = OptionMenu(tk,variable,*OPTIONS)
-menuDrop.pack()
 setDefaultPath.pack()
 massFiles.pack()
 deleteFiles.pack()
 deleteFolders.pack()
 moveFiles.pack()
 tk.mainloop()
+master.mainloop()

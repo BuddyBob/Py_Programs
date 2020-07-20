@@ -24,3 +24,20 @@ def send_email(subject,msg):
 subject = str(sub)
 msg = str(ask)
 send_email(subject,msg)
+
+import smtplib
+
+sender_email="example@gmail.com"
+receveir_email="example2@gmail.com"
+password=input("please enter your password")
+message="this email  from python "
+
+server=smtplib.SMTP_SSL('smptp.gmail.com',587)
+
+server.ehlo
+server.starttls()
+server.login(sender_email,password)
+print("login success")
+server.sendmail(sender_email,receveir_email,message)
+print("email has been sent to",receveir_email)
+server.close()

@@ -5,9 +5,6 @@ import time
 from termcolor import *
 from colorama import *
 init()
-import playsound
-playsound.playsound('song.mp3',False)
-print ('...')
 start_y = False
 start_n = False
 cpu = False

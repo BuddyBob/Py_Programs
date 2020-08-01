@@ -1,1 +1,2 @@
-d = {'d':['x','r']}
+print ('hello')
+hi = 'helllo'

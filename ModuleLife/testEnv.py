@@ -1,3 +1,3 @@
-import pp
-total = pp.random(8,2)
+import randTT
+total = randTT.r(2,8)
 print(total)

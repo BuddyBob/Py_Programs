@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import pprint
-def ReadFile():
+def full(days):
     rows = 10
     DeathsRep = []
     global D
@@ -28,15 +28,14 @@ def ReadFile():
             del DeathsRep[1]
         DeathsRep[-1] = DeathsRep[-1].strip()
         Country = DeathsRep[0]
-        Deaths = DeathsRep[-20:]
+        Deaths = DeathsRep[-days:]
         Deaths.insert(0,Country)
         D.append(Deaths)
         DeathsRep.clear()
         count = 0
         
-ReadFile()
-pprint.pprint(D)
-Stats = open('DeathStats.txt','w')
-for i in D:
-    Stats.write(str(i)+'\n')
-Stats.close()
+    pprint.pprint(D)
+    Stats = open('/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/DeathStats.txt','w')
+    for i in D:
+        Stats.write(str(i)+'\n')
+    Stats.close()

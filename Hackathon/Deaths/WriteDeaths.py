@@ -6,7 +6,7 @@ def ReadFile():
     global D
     D = []
     #Open csv file
-    stats = open('/Users/test/Documents/Hackathon/time_series_covid19_deaths_global.csv','r')
+    stats = open('/Users/test/Documents/python/Py_Programs/Hackathon/time_series_covid19_deaths_global.csv','r')
     #Create Death List
     count=0
     for row in stats:
@@ -14,7 +14,7 @@ def ReadFile():
         for i in DeathsRep:
             DeathsRep = i.split(',')
         for i in DeathsRep:
-            if i.isalpha() == True :
+            if i.isalpha() == True:
                 count+=1
         if count == 1:
             del DeathsRep[0]

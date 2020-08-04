@@ -13,30 +13,27 @@ def ReadFile():
         DeathsRep.append(row)
         for i in DeathsRep:
             DeathsRep = i.split(',')
-        for i in DeathsRep:
-            if i.isalpha() == True:
-                count+=1
-        if count == 1:
-            del DeathsRep[0]
-            del DeathsRep[1:3]
-        if count == 2:
-            del DeathsRep[0]
-            del DeathsRep[1]
-            del DeathsRep[1]
-        if DeathsRep[0].isalpha == True:
+            if DeathsRep[0] == '':
+                del DeathsRep[0]
+        if DeathsRep[0].isalpha() == True:
             pass
         if DeathsRep[0] == '':
             del DeathsRep[0]
-        
+        if all(x.isalpha() or x.isspace() for x in DeathsRep[1]):
+            del DeathsRep[0]
+            del DeathsRep[1]
+            del DeathsRep[1]
+        else:
+            del DeathsRep[1]
+            del DeathsRep[1]
         DeathsRep[-1] = DeathsRep[-1].strip()
         Country = DeathsRep[0]
-        Deaths = DeathsRep[-7:]
+        Deaths = DeathsRep[-20:]
         Deaths.insert(0,Country)
         D.append(Deaths)
         DeathsRep.clear()
         count = 0
         
-
 ReadFile()
 pprint.pprint(D)
 Stats = open('DeathStats.txt','w')

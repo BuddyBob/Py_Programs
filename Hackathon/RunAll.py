@@ -1,8 +1,9 @@
 import sys
+from GlobalVar import Max
 # insert at 1, 0 is the script path (or '' in REPL)
 sys.path.insert(1, '/Users/test/Documents/python/Py_Programs/Hackathon/Deaths')
-days = 10
 Countries = 'Germany,France' 
+days = Max
 import GetFiles
 from WriteDeaths import full
 full(days)

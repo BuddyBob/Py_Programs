@@ -1,0 +1,29 @@
+
+                                                                                |==================|
+                                                                             |= = Corona Virus Data = =|
+                                                                                |==================|
+
+                This is program to inform people about the latest Corona Virus stats. It gets its info from a github repo and allows the user to check the last [4, 7, 50] Days etc.
+                The user will also be able to select which country they would like to inspect through a clean UI using the module tkinter.
+                                                                                    ______________
+                =====================================================================|WHAT I USED|=============================================================================================
+                For gathering the data I used the request module, though I was pushing towards using Selenium which I am very strong in, but later I realized that it could become quite long
+                and request module could have done it much quicker.
+                For reading a line in a file I used iteration instead of readline.
+                When reading a line I stored the line in a list did what I had to do with the list, passed it on to the next text file and cleared the list.
+                Some countries had provinces that reported their stats so I used a json file to combine their stats to make only one dataset for each country (Quite Hard)
+                For the user interface I used tkinter because I did not want it to be text based.(really fun using tkinter)
+                And for the graphing I used matplotlib
+                                                                                    _________________________
+                =====================================================================|How to run the program|=============================================================================================
+                Prerequisite: Python3.2+
+		1)Go to "Users/name/Applications/Python Folder" Open the folder up and and right click on "Install Certificates.command"
+                This will allow you to use request to access the github post
+                2) Open up your terminal 
+                3) cd to HACKATHON folder
+                4) run "python RunAll.py"
+                                                                                    __________________
+                =====================================================================|What you can do|=====================================================================
+                You are allowed to choose the country you would like to inspect in the user interface.
+                You can enter up to 5 is the default but you are allowed to change it(///Not recommended graph can get  bit messy\\\)
+                You can change the number of days you would like to see.(///7 recommended\\\)

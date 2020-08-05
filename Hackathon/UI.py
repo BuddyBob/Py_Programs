@@ -1,13 +1,16 @@
+# This files job is to provide the user with a UI
+# I used tkinter for the frontend
 from tkinter import * 
 from tkinter import messagebox, simpledialog
 import tkinter as tk
 import sys
 import GetFiles
+#I used matplotlib for the graphing
 import  matplotlib.pyplot as plt
+#I need a couple of variables from GlobalVar file
 from GlobalVar import Max,CountryMax
 sys.path.insert(1, '/Users/test/Documents/python/Py_Programs/Hackathon/Deaths')
 def full():
-
     file = open('/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/Final.txt','r')
     L = []
     file.readline()
@@ -19,7 +22,11 @@ def full():
         L.append(row[0])
     root = tk.Tk()
     root.withdraw()
+    #Ask user for the amount of day they would like to inspect
+    #Maxvalue is set to 196
     days = simpledialog.askinteger('Days','Enter how many days you would like to inspect: ',parent=root,minvalue=0, maxvalue=Max)
+    #Here I will ask user for a country but I need to account for if they spelt a country wrong
+    #Note: When looking for United States please enter ["US"] !NOT! Us
     countriesPassed = False
     while countriesPassed == False:
         countriesPassed = False
@@ -27,20 +34,26 @@ def full():
         countriesFailed = []
         countriesList = []
         countries = simpledialog.askstring('Countries','Enter the comma seperated countries: ',parent=root)
+        #Split countries at comma
         for i in countries:
             if i == ',':
                 global length
                 length = len(countries.split(','))
                 splits = countries.split(',')
         for i in countries.split(','):
+            #Check if all of there countries entered have data
             if i in L:
                 count+=1
+                #If yes count+=1 and append the row
                 countriesList.append(i)
             else:
+                #If not append it to countriesFailes
                 countriesFailed.append(i)
+        #Check if all countries passed
         length = len(countries.split(','))
         if count == length:
             countriesPassed = True
+        #Check if they entered more countries than allowed(Default:20)
         if length > CountryMax:
             error = messagebox.showerror('Countries Exceeded','''Please Limit Your Country Choices up to 5!''')
         else:

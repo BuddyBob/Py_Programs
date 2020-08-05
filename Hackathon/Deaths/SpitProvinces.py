@@ -1,14 +1,22 @@
-import  matplotlib.pyplot as plt
+#This file was created just to read the file DeathStats and add up all the provinces to make only one 
+#List per country
+# On a level from 1 - 10 on how hard this task was I would rate it around 8
 from itertools import groupby
 from operator import add
 import json
 import operator
 def full(days):
+    #First we will open DeathStats,txt in read mode(We created this file in WriteDeaths.py)
     stats = open('/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/DeathStats.txt','r')
+    #* I added this extra readline at the start to skip the first line which was a .csv header
     stats.readline()
+    #Create a simple list called L. This is a major list actually and play a huge part
     L = []
+    #Set country to a blank
     country = ''
+    #Iterate through the list
     for row in stats:
+        #I wrote lists into a file as strings. So now I have to turn each list into a list
         row = row.replace('\'','')
         row = row.replace(']','')
         row = row.replace('[','')
@@ -41,7 +49,8 @@ def full(days):
         for tup in zip(*xss):
             country_totals[c].append(sum(tup))
 
-    # Take a look.
+    #Now I have all the provinces stored into a variable called country total. To access the deaths for each country you can use json.dumps
+    #Instead of writing to a .txt file I just write it to a json file wich make everything much easier.
     sim = open('/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/similar.json','w')
     sim.write(json.dumps(country_totals))
     sim.close()

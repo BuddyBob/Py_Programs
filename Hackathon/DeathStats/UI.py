@@ -9,9 +9,8 @@ import GetFiles
 import  matplotlib.pyplot as plt
 #I need a couple of variables from GlobalVar file
 from GlobalVar import Max,CountryMax
-sys.path.insert(1, '/Users/test/Documents/python/Py_Programs/Hackathon/Deaths')
-def full():
-    file = open('/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/Final.txt','r')
+def full(YourPath):
+    file = open(str(YourPath)+'Hackathon/DeathStats/Deaths/Final.txt','r')
     L = []
     file.readline()
     for row in file:
@@ -64,7 +63,7 @@ def full():
                 error = messagebox.showerror('Could not find this country','''There is no data stored for '''+str(countriesFailed)+'''. Make sure you entered something like this:
                              US,France ''',parent=root) 
 
-    file2 = open('/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/Final.txt','r')
+    file2 = open(str(YourPath)+'Hackathon/DeathStats/Deaths/Final.txt','r')
     major = []
     for row in file2:
         row = row.replace('\'','')

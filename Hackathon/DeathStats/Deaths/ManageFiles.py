@@ -10,17 +10,17 @@
 
 import json
 c = []
-def full():
+def full(YourPath):
     #Open json file
-    with open("/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/similar.json", "r") as read_file:
+    with open(str(YourPath)+"Hackathon/DeathStats/Deaths/similar.json", "r") as read_file:
         data = json.load(read_file)
         #Store Deaths and Countries
         keys = list(data.keys())
         values = list(data.values())
     #Open DeathStats file
-    check = open("/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/DeathStats.txt")
+    check = open(str(YourPath)+"Hackathon/DeathStats/Deaths/DeathStats.txt")
     #Create file to write all rows of data
-    lastFile = open("/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/Final.txt",'w')
+    lastFile = open(str(YourPath)+"Hackathon/DeathStats/Deaths/Final.txt",'w')
     L = []
     #Iterate through DeathStats.txt turn each str(row) into list
     for row in check:

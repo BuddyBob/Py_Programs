@@ -2,14 +2,14 @@
 #Backslashes, provinces, aand quotes
 #I need to import pprint so I looks nice if anyone needs to read a certain file
 import pprint
-def full(days):
+def full(days,YourPath):
     #Deathrep is my temporary list. I used it to edit each row in the raw file.
     DeathsRep = []
     #D ended up being my final list so I made it global hence I could use it outside the function
     global D
     D = []
     #Open csv file
-    stats = open('/Users/test/Documents/python/Py_Programs/Hackathon/time_series_covid19_deaths_global.csv','r')
+    stats = open(str(YourPath)+"Hackathon/DeathStats/time_series_covid19_deaths_global.csv",'r')
     #Create Death List
     count=0
     for row in stats:
@@ -37,7 +37,8 @@ def full(days):
         DeathsRep.clear()
         count = 0
         
-    Stats = open('/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/DeathStats.txt','w')
+
+    Stats = open(str(YourPath)+"Hackathon/DeathStats/Deaths/DeathStats.txt",'w')
     for i in D:
         Stats.write(str(i)+'\n')
     Stats.close()

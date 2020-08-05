@@ -5,9 +5,9 @@ from itertools import groupby
 from operator import add
 import json
 import operator
-def full(days):
+def full(days,YourPath):
     #First we will open DeathStats,txt in read mode(We created this file in WriteDeaths.py)
-    stats = open('/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/DeathStats.txt','r')
+    stats = open(str(YourPath)+'Hackathon/DeathStats/Deaths/DeathStats.txt','r')
     #* I added this extra readline at the start to skip the first line which was a .csv header
     stats.readline()
     #Create a simple list called L. This is a major list actually and play a huge part
@@ -51,6 +51,6 @@ def full(days):
 
     #Now I have all the provinces stored into a variable called country total. To access the deaths for each country you can use json.dumps
     #Instead of writing to a .txt file I just write it to a json file wich make everything much easier.
-    sim = open('/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/similar.json','w')
+    sim = open(str(YourPath)+'Hackathon/DeathStats/Deaths/similar.json','w')
     sim.write(json.dumps(country_totals))
     sim.close()

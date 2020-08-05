@@ -34,7 +34,6 @@ def full(days):
         DeathsRep.clear()
         count = 0
         
-    pprint.pprint(D)
     Stats = open('/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/DeathStats.txt','w')
     for i in D:
         Stats.write(str(i)+'\n')

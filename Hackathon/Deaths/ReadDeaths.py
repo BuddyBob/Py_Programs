@@ -42,7 +42,6 @@ def full(days):
             country_totals[c].append(sum(tup))
 
     # Take a look.
-    print(json.dumps(country_totals))
     sim = open('/Users/test/Documents/python/Py_Programs/Hackathon/Deaths/similar.json','w')
     sim.write(json.dumps(country_totals))
     sim.close()

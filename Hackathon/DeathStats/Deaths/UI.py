@@ -4,7 +4,6 @@ from tkinter import *
 from tkinter import messagebox, simpledialog
 import tkinter as tk
 import sys
-import GetFiles
 #I used matplotlib for the graphing
 import  matplotlib.pyplot as plt
 #I need a couple of variables from GlobalVar file

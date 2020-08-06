@@ -1,10 +1,12 @@
 import sys
-from GlobalVar import Max,YourPath
 import os
 #PLEASE READ INSTRUCTIONS FILE BEFORE RUNNING
+file = open('/Users/test/Documents/python/Py_Programs/Hackathon/DeathStats/Info.txt','r')
+YourPath = file.readline().strip()
 sys.path.insert(1, str(YourPath)+'Hackathon/DeathStats/Deaths')
 Countries = 'Germany,France' 
-days = Max
+Max = file.readline()
+days =int(Max)
 count = 0
 for file in os.listdir(YourPath):
     if file == 'Hackathon':
@@ -15,7 +17,7 @@ if count == 0:
     exit()
 else:
     print('Good Path')
-import GetFiles
+from DeathStats import GetFiles
 from Format import full
 full(days,YourPath)
 from SpitProvinces import full

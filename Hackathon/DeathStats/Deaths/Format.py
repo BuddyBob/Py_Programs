@@ -9,7 +9,7 @@ def full(days,YourPath):
     global D
     D = []
     #Open csv file
-    stats = open(str(YourPath)+"Hackathon/DeathStats/time_series_covid19_deaths_global.csv",'r')
+    stats = open(str(YourPath)+"Hackathon/time_series_covid19_deaths_global.csv",'r')
     #Create Death List
     count=0
     for row in stats:

@@ -1,0 +1,7 @@
+#This is the first file
+#I use request to download the .csv file
+import urllib.request
+import datetime
+url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"
+print(url)
+urllib.request.urlretrieve(url, filename="time_series_covid19_recoveredGlobal.csv")

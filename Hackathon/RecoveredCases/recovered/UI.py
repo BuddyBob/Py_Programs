@@ -6,8 +6,11 @@ import tkinter as tk
 import sys
 #I used matplotlib for the graphing
 import  matplotlib.pyplot as plt
-#I need a couple of variables from GlobalVar file
-from GlobalVar import Max,CountryMax
+from GlobalVar import CountryMax
+file = open('/Users/test/Documents/python/Py_Programs/Hackathon/RecoveredCases/Info.txt','r')
+file.readline()
+Max = file.readline()
+Max = int(Max)
 def full(YourPath):
     file = open(str(YourPath)+'Hackathon/RecoveredCases/Recovered/Final.txt','r')
     L = []
@@ -22,46 +25,48 @@ def full(YourPath):
     root.withdraw()
     #Ask user for the amount of day they would like to inspect
     #Maxvalue is set to 196
-    days = simpledialog.askinteger('Days','Enter how many days you would like to inspect: ',parent=root,minvalue=0, maxvalue=Max)
-    #Here I will ask user for a country but I need to account for if they spelt a country wrong
-    #Note: When looking for United States please enter ["US"] !NOT! Us
-    countriesPassed = False
-    while countriesPassed == False:
+    try:
+        days = simpledialog.askinteger('Days','Enter how many days you would like to inspect: ',parent=root,minvalue=0, maxvalue=Max)
+        #Here I will ask user for a country but I need to account for if they spelt a country wrong
+        #Note: When looking for United States please enter ["US"] !NOT! Us
         countriesPassed = False
-        count=0
-        countriesFailed = []
-        countriesList = []
-        countries = simpledialog.askstring('Countries','Enter the comma seperated countries: ',parent=root)
-        #Split countries at comma
-        for i in countries:
-            if i == ',':
-                global length
-                length = len(countries.split(','))
-                splits = countries.split(',')
-        for i in countries.split(','):
-            #Check if all of there countries entered have data
-            if i in L:
-                count+=1
-                #If yes count+=1 and append the row
-                countriesList.append(i)
+        while countriesPassed == False:
+            countriesPassed = False
+            count=0
+            countriesFailed = []
+            countriesList = []
+            countries = simpledialog.askstring('Countries','Enter the comma seperated countries: ',parent=root)
+            #Split countries at comma
+            for i in countries:
+                if i == ',':
+                    global length
+                    length = len(countries.split(','))
+                    splits = countries.split(',')
+            for i in countries.split(','):
+                #Check if all of there countries entered have data
+                if i in L:
+                    count+=1
+                    #If yes count+=1 and append the row
+                    countriesList.append(i)
+                else:
+                    #If not append it to countriesFailes
+                    countriesFailed.append(i)
+            #Check if all countries passed
+            length = len(countries.split(','))
+            if count == length:
+                countriesPassed = True
+            #Check if they entered more countries than allowed(Default:20)
+            if length > CountryMax:
+                error = messagebox.showerror('Countries Exceeded','''Please Limit Your Country Choices up to 5!''')
             else:
-                #If not append it to countriesFailes
-                countriesFailed.append(i)
-        #Check if all countries passed
-        length = len(countries.split(','))
-        if count == length:
-            countriesPassed = True
-        #Check if they entered more countries than allowed(Default:20)
-        if length > CountryMax:
-            error = messagebox.showerror('Countries Exceeded','''Please Limit Your Country Choices up to 5!''')
-        else:
-            if len(countriesFailed)>1:
-                error = messagebox.showerror('Could not these countries','''There is no data stored for '''+str(countriesFailed)+'''. Make sure you entered something like this:
-                             US,France ''',parent=root) 
-            if len(countriesFailed) == 1:
-                error = messagebox.showerror('Could not find this country','''There is no data stored for '''+str(countriesFailed)+'''. Make sure you entered something like this:
-                             US,France ''',parent=root) 
-
+                if len(countriesFailed)>1:
+                    error = messagebox.showerror('Could not these countries','''There is no data stored for '''+str(countriesFailed)+'''. Make sure you entered something like this:
+                                US,France ''',parent=root) 
+                if len(countriesFailed) == 1:
+                    error = messagebox.showerror('Could not find this country','''There is no data stored for '''+str(countriesFailed)+'''. Make sure you entered something like this:
+                                US,France ''',parent=root) 
+    except:
+        print('You must have exited')
     file2 = open(str(YourPath)+'Hackathon/RecoveredCases/Recovered/Final.txt','r')
     major = []
     for row in file2:
@@ -77,7 +82,6 @@ def full(YourPath):
     plt.xlabel('Last '+str(days)+' Days')
     plt.ylabel('Recovered Cases')
     plt.title('Corona Stats - Recovered Cases')
-    print(major)
     Full = []
     Country = []
     for lists in major:
@@ -86,10 +90,9 @@ def full(YourPath):
         Full.append(dataN)
         length = len(dataN)
     for lists in Full:
+        print(lists)
         for i in range(0, len(lists)): 
             lists[i] = int(lists[i]) 
-    print(Full)
-    print(length)
     count=0
     for lists in Full:
         Graph = plt.plot(range(length),lists,label=Country[count])

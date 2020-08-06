@@ -1,5 +1,8 @@
 import sys
 import os
+import tkinter as tk
+from tkinter import messagebox
+tk = tk.Tk()
 #PLEASE READ INSTRUCTIONS FILE BEFORE RUNNING
 file = open('/Users/test/Documents/python/Py_Programs/Hackathon/DeathStats/Info.txt','r')
 YourPath = file.readline().strip()
@@ -8,15 +11,13 @@ Countries = 'Germany,France'
 Max = file.readline()
 days =int(Max)
 count = 0
-for file in os.listdir(YourPath):
-    if file == 'Hackathon':
-        count+=1
-if count == 0:
-    print('Change Your Path, It does not contain Hackathon Folder')
-    print('You can do this in the GlobalVar file')
+try:
+    for file in os.listdir(YourPath):
+        if file == 'Hackathon':
+            print('Good Path')
+except FileNotFoundError:
+    error = messagebox.showerror("Error Occured",'WE COULD NOT FIND THE "HACKATHON" FOLDER IN THAT DIRECTORY')
     exit()
-else:
-    print('Good Path')
 from DeathStats import GetFiles
 from Format import full
 full(days,YourPath)

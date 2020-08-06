@@ -7,7 +7,11 @@ import sys
 #I used matplotlib for the graphing
 import  matplotlib.pyplot as plt
 #I need a couple of variables from GlobalVar file
-from GlobalVar import Max,CountryMax
+from GlobalVar import CountryMax
+file = open('/Users/test/Documents/python/Py_Programs/Hackathon/DeathStats/Info.txt','r')
+file.readline()
+Max = file.readline()
+Max = int(Max)
 def full(YourPath):
     file = open(str(YourPath)+'Hackathon/DeathStats/Deaths/Final.txt','r')
     L = []
@@ -77,7 +81,6 @@ def full(YourPath):
     plt.xlabel('Days')
     plt.ylabel('Deaths')
     plt.title('Corona Stats')
-    print(major)
     Full = []
     Country = []
     for lists in major:
@@ -88,8 +91,6 @@ def full(YourPath):
     for lists in Full:
         for i in range(0, len(lists)): 
             lists[i] = int(lists[i]) 
-    print(Full)
-    print(length)
     count=0
     for lists in Full:
         Graph = plt.plot(range(length),lists,label=Country[count])

@@ -1,3 +1,3 @@
-Max = 196
+
+#* * PLEASE DO NOT CHANGE!
 CountryMax = 20
-YourPath = '/Users/test/Documents/python/Py_Programs/'

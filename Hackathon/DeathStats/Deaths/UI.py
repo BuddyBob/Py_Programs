@@ -6,13 +6,22 @@ import tkinter as tk
 import sys
 #I used matplotlib for the graphing
 import  matplotlib.pyplot as plt
-#I need a couple of variables from GlobalVar file
-from GlobalVar import CountryMax
-file = open('/Users/test/Documents/python/Py_Programs/Hackathon/DeathStats/Info.txt','r')
-file.readline()
-Max = file.readline()
-Max = int(Max)
-def full(YourPath):
+import json
+def full2(YourPath):
+    s = open('/Users/test/Documents/python/Py_Programs/Hackathon/setting.json')
+    setting = json.load(s)
+    gridd = setting["Grid"]
+    CountryMax = setting["CountryMax"]
+    GraphColor = setting["GraphColor"]
+    TitleSize = setting["TitleSize"]
+    LineThickness = setting["lineThickness"]
+    GridLineThickness = setting["GridLineThickness"]
+    GridLineColor = setting["GridLineColor"]
+    LStyle = setting["lineStyles"]
+    file = open('/Users/test/Documents/python/Py_Programs/Hackathon/DeathStats/Info.txt','r')
+    file.readline()
+    Max = file.readline()
+    Max = int(Max)
     file = open(str(YourPath)+'Hackathon/DeathStats/Deaths/Final.txt','r')
     L = []
     file.readline()
@@ -77,10 +86,14 @@ def full(YourPath):
             major.append(row)
     for lists in major:
         lists[-1] = re.sub('\\\\n|\n', '' , lists[-1])
-    plt.style.use(['dark_background'])
-    plt.xlabel('Days')
-    plt.ylabel('Deaths')
-    plt.title('Corona Stats')
+    plt.xlabel('Last '+str(days)+' Days',fontsize=10)
+    plt.ylabel('Deaths',fontsize=10)
+    plt.title('Corona Stats-Deaths',fontsize=TitleSize)
+    if gridd == True:
+        plt.grid()
+    ax = plt.gca()
+    ax.set_facecolor(GraphColor)
+    ax.grid(color=GridLineColor, linestyle=LStyle, linewidth=GridLineThickness)
     Full = []
     Country = []
     for lists in major:
@@ -93,7 +106,7 @@ def full(YourPath):
             lists[i] = int(lists[i]) 
     count=0
     for lists in Full:
-        Graph = plt.plot(range(length),lists,label=Country[count])
+        Graph = plt.plot(range(length),lists,label=Country[count],linewidth=LineThickness)
         count+=1
     plt.legend()
     plt.show()

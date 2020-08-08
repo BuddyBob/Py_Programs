@@ -6,12 +6,23 @@ import tkinter as tk
 import sys
 #I used matplotlib for the graphing
 import  matplotlib.pyplot as plt
-from GlobalVar import CountryMax
-file = open('/Users/test/Documents/python/Py_Programs/Hackathon/RecoveredCases/Info.txt','r')
-file.readline()
-Max = file.readline()
-Max = int(Max)
+import json
 def full(YourPath):
+    s = open('/Users/test/Documents/python/Py_Programs/Hackathon/setting.json')
+    setting = json.load(s)
+    gridd = setting["Grid"]
+    print(gridd)
+    CountryMax = setting["CountryMax"]
+    GraphColor = setting["GraphColor"]
+    TitleSize = setting["TitleSize"]
+    LineThickness = setting["lineThickness"]
+    GridLineThickness = setting["GridLineThickness"]
+    GridLineColor = setting["GridLineColor"]
+    LStyle = setting["lineStyles"]
+    file = open('/Users/test/Documents/python/Py_Programs/Hackathon/RecoveredCases/Info.txt','r')
+    file.readline()
+    Max = file.readline()
+    Max = int(Max)
     file = open(str(YourPath)+'Hackathon/RecoveredCases/Recovered/Final.txt','r')
     L = []
     file.readline()
@@ -78,24 +89,31 @@ def full(YourPath):
             major.append(row)
     for lists in major:
         lists[-1] = re.sub('\\\\n|\n', '' , lists[-1])
-    plt.style.use(['dark_background'])
-    plt.xlabel('Last '+str(days)+' Days')
-    plt.ylabel('Recovered Cases')
-    plt.title('Corona Stats - Recovered Cases')
+    
+    
+    
     Full = []
     Country = []
+    plt.xlabel('Last '+str(days)+' Days',fontsize=10)
+    plt.ylabel('Recovered Cases',fontsize=10)
+    plt.title('Corona Stats - Recovered Cases',fontsize=TitleSize)
+    if gridd == True:
+        plt.grid()
+    ax = plt.gca()
+    ax.set_facecolor(GraphColor)
+    ax.grid(color=GridLineColor, linestyle=LStyle, linewidth=GridLineThickness)
+   
     for lists in major:
         dataN = lists[-days:]
         Country.append(lists[0]) 
         Full.append(dataN)
         length = len(dataN)
     for lists in Full:
-        print(lists)
         for i in range(0, len(lists)): 
             lists[i] = int(lists[i]) 
     count=0
     for lists in Full:
-        Graph = plt.plot(range(length),lists,label=Country[count])
+        Graph = plt.plot(range(length),lists,label=Country[count],linewidth=LineThickness)
         count+=1
     plt.legend()
     plt.show()

@@ -20,11 +20,11 @@ def full():
         error = messagebox.showerror("Error Occured",'WE COULD NOT FIND THE "HACKATHON" FOLDER IN THAT DIRECTORY')
         exit()
     from DeathStats import GetFiles
-    from Format import full
+    from FormatSecond import full
     full(days,YourPath)
-    from SpitProvinces import full
+    from SpitProvincesDeaths import full
     full(days,YourPath)
     from ManageFiles import full
     full(YourPath)
-    from UI import full2
-    full2(YourPath)
+    from UI import fullSECOND
+    fullSECOND(YourPath)

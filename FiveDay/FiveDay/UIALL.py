@@ -7,11 +7,11 @@ import sys
 #I used matplotlib for the graphing
 import  matplotlib.pyplot as plt
 import json
+sys.path.insert(0,'/Users/test/Documents/python/Py_Programs/Hackathon')
 def full(YourPath):
     s = open('/Users/test/Documents/python/Py_Programs/Hackathon/setting.json')
     setting = json.load(s)
     gridd = setting["Grid"]
-    print(gridd)
     CountryMax = setting["CountryMax"]
     GraphColor = setting["GraphColor"]
     TitleSize = setting["TitleSize"]
@@ -19,32 +19,29 @@ def full(YourPath):
     GridLineThickness = setting["GridLineThickness"]
     GridLineColor = setting["GridLineColor"]
     LStyle = setting["lineStyles"]
-    file = open('/Users/test/Documents/python/Py_Programs/Hackathon/RecoveredCases/Info.txt','r')
+    file = open('/Users/test/Documents/python/Py_Programs/Hackathon/FiveDay/Info.txt','r')
     file.readline()
     Max = file.readline()
     Max = int(Max)
-    file = open(str(YourPath)+'Hackathon/RecoveredCases/Recovered/Final.txt','r')
-    L = []
-    file.readline()
-    for row in file:
-        row = row.replace('\'','')
-        row = row.replace(']','')
-        row = row.replace('[','')
-        row = row.split(',')
-        L.append(row[0])
-    root = tk.Tk()
-    root.withdraw()
-    #Ask user for the amount of day they would like to inspect
-    #Maxvalue is set to 196
-    try:
-        days = simpledialog.askinteger('Days','Enter how many days you would like to inspect: ',parent=root,minvalue=0, maxvalue=Max)
-        #Here I will ask user for a country but I need to account for if they spelt a country wrong
-        #Note: When looking for United States please enter ["US"] !NOT! Us
+    days = Max
+    def DeathsRoll():
+        file = open(str(YourPath)+'Hackathon/FiveDay/Deaths/Final.txt','r')
+        L = []
+        file.readline()
+        for row in file:
+            row = row.replace('\'','')
+            row = row.replace(']','')
+            row = row.replace('[','')
+            row = row.split(',')
+            L.append(row[0])
+        root = tk.Tk()
+        root.withdraw()
         countriesPassed = False
         while countriesPassed == False:
             countriesPassed = False
             count=0
             countriesFailed = []
+            global countriesList
             countriesList = []
             countries = simpledialog.askstring('Countries','Enter the comma seperated countries: ',parent=root)
             #Split countries at comma
@@ -75,10 +72,9 @@ def full(YourPath):
                                 US,France ''',parent=root) 
                 if len(countriesFailed) == 1:
                     error = messagebox.showerror('Could not find this country','''There is no data stored for '''+str(countriesFailed)+'''. Make sure you entered something like this:
-                                US,France ''',parent=root) 
-    except:
-        print('You must have exited')
-    file2 = open(str(YourPath)+'Hackathon/RecoveredCases/Recovered/Final.txt','r')
+                                US,France ''',parent=root)
+    DeathsRoll()
+    file2 = open(str(YourPath)+'Hackathon/FiveDay/Deaths/Final.txt','r')
     major = []
     for row in file2:
         row = row.replace('\'','')
@@ -89,27 +85,23 @@ def full(YourPath):
             major.append(row)
     for lists in major:
         lists[-1] = re.sub('\\\\n|\n', '' , lists[-1])
-    
-    
-    
-    Full = []
-    Country = []
     plt.xlabel('Last '+str(days)+' Days',fontsize=10)
-    plt.ylabel('Recovered Cases',fontsize=10)
-    plt.title('Corona Stats - Recovered Cases',fontsize=TitleSize)
+    plt.ylabel('Deaths',fontsize=10)
+    plt.title('Corona Stats-Deaths',fontsize=TitleSize)
     if gridd == True:
         plt.grid()
     ax = plt.gca()
     ax.set_facecolor(GraphColor)
     ax.grid(color=GridLineColor, linestyle=LStyle, linewidth=GridLineThickness)
-   
+    Full = []
+    Country = []
     for lists in major:
         dataN = lists[-days:]
         Country.append(lists[0]) 
         Full.append(dataN)
         length = len(dataN)
     for lists in Full:
-        for i in range(0, len(lists)): 
+        for i in range(1, len(lists)): 
             lists[i] = int(lists[i]) 
     count=0
     for lists in Full:

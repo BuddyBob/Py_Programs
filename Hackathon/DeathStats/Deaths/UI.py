@@ -7,7 +7,7 @@ import sys
 #I used matplotlib for the graphing
 import  matplotlib.pyplot as plt
 import json
-def full2(YourPath):
+def fullSECOND(YourPath):
     s = open('/Users/test/Documents/python/Py_Programs/Hackathon/setting.json')
     setting = json.load(s)
     gridd = setting["Grid"]

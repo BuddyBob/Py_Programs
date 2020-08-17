@@ -1,6 +1,4 @@
-#This is the second file I created. It helps strip all the unnecessary elements such as 
-#Backslashes, provinces, aand quotes
-#I need to import pprint so I looks nice if anyone needs to read a certain file
+  
 import pprint
 def full(days,YourPath):
     #Deathrep is my temporary list. I used it to edit each row in the raw file.

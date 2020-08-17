@@ -1,13 +1,43 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import simpledialog
+from cases import RunAll
 from DeathStats import RunAll1
 from RecoveredCases import RunAll2
+import json
 tk = tk.Tk()
 Max = 190
+import urllib.request
+import datetime
+url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"
+urllib.request.urlretrieve(url, filename="time_series_covid19_recoveredGlobal.csv")
+url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+urllib.request.urlretrieve(url, filename="time_series_covid19_confirmed_global.csv")
+url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
+urllib.request.urlretrieve(url, filename="time_series_covid19_deaths_global.csv")
+
+s = open('setting.json')
+setting = json.load(s)
+btnColor = setting["ButtonColor"] 
+def RunCases():
+    try:
+        open('/Users/test/Documents/python/Py_Programs/Hackathon/DeathStats/Info.txt','r')
+        RunAll.full()
+    except FileNotFoundError:
+        YourPath = simpledialog.askstring('Countries','''Please Enter Your Path To HACKATHON Folder:
+    Example: 
+    \"/Users/Name/Documents/python/\" 
+    Note: Leave out the HACKATHON folder and you must put a slash at the end''',parent=tk)
+        file = open('/Users/test/Documents/python/Py_Programs/Hackathon/DeathStats/Info.txt','w')
+        file.write(str(YourPath)+'\n')
+        file.write(str(Max))
+        file.close()
+
+        RunAll.full()
+
 def RunDeaths():
-    #If they click on RunDeaths I will run this function
-    #Check if they have already entered a path
+
+
     try:
         open('/Users/test/Documents/python/Py_Programs/Hackathon/DeathStats/Info.txt','r')
         RunAll1.full()
@@ -16,16 +46,15 @@ def RunDeaths():
     Example: 
     \"/Users/Name/Documents/python/\" 
     Note: Leave out the HACKATHON folder and you must put a slash at the end''',parent=tk)
-    #Write this path to a file call Info.txt
+
         file = open('/Users/test/Documents/python/Py_Programs/Hackathon/DeathStats/Info.txt','w')
         file.write(str(YourPath)+'\n')
         file.write(str(Max))
         file.close()
-        #Run all the files that gather the data for Corona Virus Deaths
+
         RunAll1.full()
 def RunRecoveredCases():
-    #If they click on RecoveredCases Run this
-    #Check If they had already entered a path
+
     try:
         open('/Users/test/Documents/python/Py_Programs/Hackathon/RecoveredCases/Info.txt','r')
         RunAll2.full1()
@@ -35,15 +64,18 @@ def RunRecoveredCases():
     \"/Users/Name/Documents/python/\" 
     Note: Leave out the HACKATHON folder and you must put a slash at the end''',parent=tk)
         file = open('/Users/test/Documents/python/Py_Programs/Hackathon/RecoveredCases/Info.txt','w')
-        #Write there path to a file
+
         file.write(str(YourPath)+'\n')
         file.write(str(Max))
         file.close()
-        #Run all the files that gather all the Recovered Cases
+
         RunAll2.full1()
 
-Deaths = Button(tk,height = 20, width = 30, text='Run Deaths',command = RunDeaths,highlightbackground='#000000')
-Recovered = Button(tk,height = 20, width = 30, text='Run Recovered Cases',command = RunRecoveredCases,highlightbackground='#000000')
+
+Cases =Button(tk,height = 10, width = 30, text='Run Cases',command = RunCases,highlightbackground = btnColor)
+Deaths = Button(tk,height = 10, width = 30, text='Run Deaths',command = RunDeaths,highlightbackground=btnColor)
+Recovered = Button(tk,height = 10, width = 30, text='Run Recovered Cases',command = RunRecoveredCases,highlightbackground=btnColor)
+Cases.pack()
 Deaths.pack()
 Recovered.pack()
 tk.mainloop()

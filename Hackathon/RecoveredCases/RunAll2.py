@@ -21,11 +21,11 @@ def full1():
         exit()
     sys.path.insert(0, str(YourPath)+'Hackathon/RecoveredCases/recovered')
     from RecoveredCases import GetFiles
-    from Format import full
+    from FormatLast import full
     full(days,YourPath)
     from SpitProvinces import full
     full(days,YourPath)
     from ManageFiles import full
     full(YourPath)
-    from UIs import full
+    from UILast import full
     full(YourPath)

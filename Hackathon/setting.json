@@ -17,7 +17,8 @@
     "GraphColor":"black",
     "TitleSize":15,
     "lineThickness":2,
-    "lineStyles": "-"
+    "lineStyles": "-",
+    "ButtonColor":"#12cc44"
 
 
 }

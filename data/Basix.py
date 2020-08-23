@@ -7,7 +7,7 @@ class Emp:
         self.first = first
         self.last = last
         self.pay = pay
-#Create an object for the class containing the attributes first name, last name and pay
+#Create an object for the class xxxaining the attributes first name, last name and pay
 emp1 = Emp("Thavas","Antonio",90000)
 emp2 = Emp("Thaze","Antonio",90000000)
 #Connect to db, memory is used for testing

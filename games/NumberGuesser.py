@@ -69,7 +69,7 @@ if start_y == True:
             dym_a = (input())
             if dym_a ==  'y':
                 print(Fore.RED+"Ok next time check your spelling")
-                print(Fore.YELLOW+"Lets continue shall we")
+                print(Fore.YELLOW+"Lets xxxinue shall we")
                 time.sleep(1)
                 cpu_vs_you = True
             else:
@@ -82,7 +82,7 @@ if start_y == True:
             dym_b = (input())
             if dym_b == 'y':
                 print(Fore.RED+'Ok next time check your spelling')
-                print(Fore.YELLOW+'Ok lets continue then')
+                print(Fore.YELLOW+'Ok lets xxxinue then')
                 cpu = True 
             else:
                 print(Fore.GREEN+'Ok thanks for playing')

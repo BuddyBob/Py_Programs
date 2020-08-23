@@ -28,7 +28,7 @@ def full(YourPath):
         row = row.replace(']','')
         row = row.replace('[','')
         row = row.split(',')
-        #If the country does not contain a province it is approved and is written to Final.txt
+        #If the country does not xxxain a province it is approved and is written to Final.txt
         if row[0] not in keys:
             lastFile.write(str(row)+'\n')
     #Close this file because it is no longer usefull

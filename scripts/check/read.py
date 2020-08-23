@@ -9,7 +9,7 @@ while count <= 3:
         again = again.lower()
         if again == 'y':
             count == 0
-            continue
+            xxxinue
         else:
             count == 4
             break

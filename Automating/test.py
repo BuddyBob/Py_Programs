@@ -1,31 +1,12 @@
-lst = [] 
-
-print(lst)
-print('The queue is now empty...')
-
-MaxQueue = int(input('\nSet The Maximum Queue to: '))
-
-for i in range(0, MaxQueue): 
-    print(lst)
-    inn = input('Enter Name: ')
-    lst.append(inn)  
-print('')   
-print(lst) 
-print('The Queue is full..')   
-
-def get_answer(prompt):
-    while True:
-        answer = input(prompt)
-        if answer not in ('yes','no'):
-            answer = input(prompt)        
-        if answer in ('yes'):
-            break         
-        if answer in ('no'):
-            exit()
-    
-print(get_answer('Do you want to start seriving? '))
-
-for i in range(MaxQueue):
-    print(lst)
-    de = input('press (enter) to serve')
-    print(lst.pop(0))
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.keys import Keys
+import time
+driver = webdriver.Chrome(executable_path="/Users/test/Desktop/chromedriver")
+driver.get('https://www.mcrpg.com/kohi-click-test/')
+while True:
+    try:
+        driver.find_element_by_xpath('//*[@id="vue"]/button').click()
+    except Exception:
+        time.sleep(10)

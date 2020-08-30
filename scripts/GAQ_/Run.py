@@ -1,3 +1,3 @@
 from Sequence import sequence
-seq = 6,11,18,27,38,51
+seq = 1,3,6,10
 sequence(seq)

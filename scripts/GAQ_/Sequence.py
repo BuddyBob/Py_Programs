@@ -22,7 +22,7 @@ def sequence(seq):
         previousNum = list3[0] - difference3[1]
         if previousNum > 0:
             previousNum = '+'+str(previousNum)
-        secondEq = str(difference3[1])+'n'+str(previousNum)
+        secondEq = str(difference3[1])+'n - '+str(previousNum)
         return firstEq + ' + ' + secondEq
 
 

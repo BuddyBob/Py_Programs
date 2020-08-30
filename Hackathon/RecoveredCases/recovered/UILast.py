@@ -97,11 +97,11 @@ def full(YourPath):
     plt.xlabel('Last '+str(days)+' Days',fontsize=10)
     plt.ylabel('Recovered Cases',fontsize=10)
     plt.title('Corona Stats - Recovered Cases',fontsize=TitleSize)
-    if gridd == True:
-        plt.grid()
     ax = plt.gca()
     ax.set_facecolor(GraphColor)
-    ax.grid(color=GridLineColor, linestyle=LStyle, linewidth=GridLineThickness)
+    if gridd == True:
+        plt.grid()
+        ax.grid(color=GridLineColor, linestyle=LStyle, linewidth=GridLineThickness)
    
     for lists in major:
         dataN = lists[-days:]

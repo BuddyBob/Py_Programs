@@ -10,7 +10,7 @@
     "#LineStlyeOptions2": "                     '-', '--', '-.', ':'                                      ",
     "#EndComments":"========================",
     
-    "Grid":false,
+    "Grid":true,
     "GridLineThickness":0.2,
     "GridLineColor":"white",
     "CountryMax":25,

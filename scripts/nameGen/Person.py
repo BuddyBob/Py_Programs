@@ -48,8 +48,10 @@ def GenName():
         global Name
         Name = name.title()
 def GenCar():
-for i in range(500):
-    GenName()
-    Person = Stats(name = Name,age=random.randint(20,80))
-    print(Person.formatIT())
+    for i in range(500):
+        GenName()
+        Person = Stats(name = Name,age=random.randint(20,80))
+        print(Person.formatIT())
 
+GenCar()
+Best_names = []

@@ -1,0 +1,17 @@
+REQUIREMENTS
+    - Python 3.2+
+    - Activate Request Module
+
+HOW TO RUN THE PROGRAM
+    - Download source code from github link: https://github.com/BuddyBob/Py_Programs (Hackathon Folder)
+    - cd into Hackathon folder, run "Run.py" in terminal.
+
+UI SETUP;
+    -After Run.py, user will see three button. Click on either one for different graphs.
+    - Next, user will have to enter the path up to the "Hackathon" folder:
+        Ex: /Users/Documents/Python/  before "Hackathon" folder.
+    -This will only happen once, your path will be stored in a file for later use.
+UI
+    - After entering your path you can enter a number of days you would like to see
+    infections for
+    

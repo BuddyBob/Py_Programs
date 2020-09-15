@@ -14,7 +14,7 @@ emp2 = Emp("Thaze","Antonio",90000000)
 #It will erase the database everytime you run it
 #So you have a new one everytime
 #If you dont want it to be errased you can just replace it with a file name.db
-conn = sqlite3.connect(':memory:')
+conn = sqlite3.connect('basix.db')
 #This variable will let you insert data into the db
 c = conn.cursor()
 #This try and except is not nessaccary but if you do not

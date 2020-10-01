@@ -19,7 +19,7 @@ live = wait.until(visible((By.XPATH,'//*[@id="carousel-game-content"]/img'))).cl
 level = wait.until(visible((By.XPATH,'//*[@id="livemathletics"]/body/div[1]/ui-view/div/level-selector-directive/div/div['+str(level)+']/button'))).click()
 cpu = wait.until(visible((By.XPATH,'//*[@id="livemathletics"]/body/div[1]/ui-view/div/div[4]/div/div[2]/button'))).click()
 go = wait.until(visible((By.XPATH,'//*[@id="livemathletics"]/body/div[1]/ui-view/div/div[4]/div/go-button/div/button[1]'))).click()
-for i in range(20):
+for i in range(31):
     print(i)
     for i in range(89):
         time.sleep(.5)
@@ -42,3 +42,5 @@ for i in range(20):
         except: pass
     playagain = waitLonger.until(visible((By.XPATH,'//*[@id="livemathletics"]/body/div[1]/ui-view/div/div[2]/div[1]/div[2]/play-again-box/div/table[2]/tbody/tr/td[1]/button'))).click()
     # x = wait.until(visible((By.XPATH,'//*[@id="livemathletics"]/body/div[1]/ui-view/div/div[3]/div/div[1]/button'))).click()
+    #9:07
+    #9:35

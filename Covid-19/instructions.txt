@@ -1,0 +1,43 @@
+                                                |««««INSTRUCTIONS»»»»|
+ –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+|    REQUIREMENTS                                           
+|   ––––––––––––
+|        - Python 3.2+
+|        - Activate Request Module
+|    HOW TO RUN THE PROGRAM
+|    ––––––––––––––––––––––
+|        - Download source code from github link: https://github.com/BuddyBob/Py_Programs (Covid-19 Folder)
+|        - cd into Covid-19 folder, run "Run.py" in terminal.
+|    UI SETUP
+|    ––––––––
+|        -After Run.py, user will see three button. Click on either one for different graphs.
+|        - Next, user will have to enter the path up to the "Covid-19" folder:
+|            Ex: /Users/Documents/Python/  before "Covid-19" folder.
+|        -This will only happen once, your path will be stored in a file for later use.
+|    UI
+|    ––
+|        - After entering your path you can enter a number of days you would like to see
+|        infections
+|        - Now enter certain countries that you would like to see. 
+|            Ex: US,France,Germany,Italy
+|    SETTINGS
+|    ––––––––
+|        - You can go into the settings.json file and you will be able to customize the UI.
+|        - Colors: use hex colors or strings
+|        - Grid: False or True
+|        - Thickness: int   
+|        RECOMENDATIONS
+|        --------------
+|      - linestyles: -,--
+|      - linethickness: <1
+|      - grid: True
+|      - Save file once changes made
+|    ADDING YOUR OWN DATA
+|    ––––––––––––––––––––
+        - After downloading the data add your own data into one of the three files
+|            time_series_covid19_confirmed_global.csv,
+|            time_series_covid19_deaths_global.csv,
+|            time_series_covid19_recoveredGlobal.csv
+|        - The data must include a location and the infections comma seperated (In this order)
+|            Ex: US,122069,141205,162707,188724
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

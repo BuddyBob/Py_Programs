@@ -5,7 +5,7 @@ def full():
     from tkinter import messagebox
     tk = tk.Tk()
 
-    file = open('/Users/test/Documents/python/Py_Programs/Covid-19/DeathStats/Info.txt','r')
+    file = open('/Users/aspera/Documents/python/Py_Programs/Covid-19/DeathStats/Info.txt','r')
     YourPath = file.readline().strip()
     sys.path.insert(1, str(YourPath)+'Covid-19/cases/Cases')
     Countries = 'Germany,France' 

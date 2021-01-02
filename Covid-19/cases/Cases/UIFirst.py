@@ -7,7 +7,7 @@ import sys
 import  matplotlib.pyplot as plt
 import json
 def full(YourPath):
-    s = open('/Users/test/Documents/python/Py_Programs/Covid-19/setting.json')
+    s = open('/Users/aspera/Documents/python/Py_Programs/Covid-19/setting.json')
     setting = json.load(s)
     gridd = setting["Grid"]
     CountryMax = setting["CountryMax"]
@@ -17,7 +17,7 @@ def full(YourPath):
     GridLineThickness = setting["GridLineThickness"]
     GridLineColor = setting["GridLineColor"]
     LStyle = setting["lineStyles"]
-    file = open('/Users/test/Documents/python/Py_Programs/Covid-19/DeathStats/Info.txt','r')
+    file = open('/Users/aspera/Documents/python/Py_Programs/Covid-19/DeathStats/Info.txt','r')
     file.readline()
     Max = file.readline()
     Max = int(Max)

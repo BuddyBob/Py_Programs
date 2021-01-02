@@ -22,14 +22,14 @@ setting = json.load(s)
 btnColor = setting["ButtonColor"] 
 def RunCases():
     try:
-        open('/Users/test/Documents/python/Py_Programs/Covid-19/DeathStats/Info.txt','r')
+        open('/Users/aspera/Documents/python/Py_Programs/Covid-19/DeathStats/Info.txt','r')
         RunAll.full()
     except FileNotFoundError:
         YourPath = simpledialog.askstring('Countries','''Please Enter Your Path To Covid-19 Folder:
     Example: 
     \"/Users/Name/Documents/python/\" 
     Note: Leave out the Covid-19 folder and you must put a slash at the end''',parent=tk)
-        file = open('/Users/test/Documents/python/Py_Programs/Covid-19/DeathStats/Info.txt','w')
+        file = open('/Users/aspera/Documents/python/Py_Programs/Covid-19/DeathStats/Info.txt','w')
         file.write(str(YourPath)+'\n')
         file.write(str(Max))
         file.close()
@@ -40,7 +40,7 @@ def RunDeaths():
 
 
     try:
-        open('/Users/test/Documents/python/Py_Programs/Covid-19/DeathStats/Info.txt','r')
+        open('/Users/aspera/Documents/python/Py_Programs/Covid-19/DeathStats/Info.txt','r')
         RunAll1.full()
     except FileNotFoundError:
         YourPath = simpledialog.askstring('Countries','''Please Enter Your Path To Covid-19 Folder:
@@ -48,7 +48,7 @@ def RunDeaths():
     \"/Users/Name/Documents/python/\" 
     Note: Leave out the Covid-19 folder and you must put a slash at the end''',parent=tk)
 
-        file = open('/Users/test/Documents/python/Py_Programs/Covid-19/DeathStats/Info.txt','w')
+        file = open('/Users/aspera/Documents/python/Py_Programs/Covid-19/DeathStats/Info.txt','w')
         file.write(str(YourPath)+'\n')
         file.write(str(Max))
         file.close()
@@ -57,14 +57,14 @@ def RunDeaths():
 def RunRecoveredCases():
 
     try:
-        open('/Users/test/Documents/python/Py_Programs/Covid-19/RecoveredCases/Info.txt','r')
+        open('/Users/aspera/Documents/python/Py_Programs/Covid-19/RecoveredCases/Info.txt','r')
         RunAll2.full1()
     except FileNotFoundError:
         YourPath = simpledialog.askstring('Countries','''Please Enter Your Path To Covid-19 Folder:
     Example: 
     \"/Users/Name/Documents/python/\" 
     Note: Leave out the Covid-19 folder and you must put a slash at the end''',parent=tk)
-        file = open('/Users/test/Documents/python/Py_Programs/Covid-19/RecoveredCases/Info.txt','w')
+        file = open('/Users/aspera/Documents/python/Py_Programs/Covid-19/RecoveredCases/Info.txt','w')
 
         file.write(str(YourPath)+'\n')
         file.write(str(Max))

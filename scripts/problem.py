@@ -44,4 +44,4 @@ for i in another_random_list:
 if count >= 2:
     total = count - 1
     total = str(total)
-    print("There are "+total+" more")
+    print("There is "+total+" more")

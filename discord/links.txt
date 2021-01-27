@@ -1,0 +1,2 @@
+Discord Developer Portal: https://discordapp.com/developers/
+Permissions Calculator: https://discordapi.com/permissions.html

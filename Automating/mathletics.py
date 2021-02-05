@@ -4,18 +4,21 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
+import atexit
 import time
-def script():
+import datetime
+
+def script(start):
     try:
         while True:
             level = 4
-            driver =  webdriver.Chrome(executable_path='/Users/Aspera/Desktop/chromedriver')
+            driver =  webdriver.Chrome(executable_path='/Users/aspera/Desktop/chromedriver')
             waitshort = WebDriverWait(driver,.5)
             wait = WebDriverWait(driver, 20)
             waitLonger = WebDriverWait(driver, 100)
             visible = EC.visibility_of_element_located
             driver.get('https://login.mathletics.com/?_ga=2.60361444.876282730.1600105337-1065983887.1599670686&_gac=1.50132436.1600106071.Cj0KCQjwqfz6BRD8ARIsAIXQCf3LZK7GSetOE9YHfbj-cm2Z89tzZRmW-QwIs54eqhKvnkce6x8QB_oaAv_AEALw_wcB')
-            user = wait.until(visible((By.XPATH,'//*[@id="username"]'))).send_keys('THA10696')
+            user = wait.until(visible((By.XPATH,'//*[@id="username"]'))).send_keys('tha10696')
             pwd = wait.until(visible((By.XPATH,'//*[@id="password"]'))).send_keys('water73',Keys.ENTER)
 
             play = wait.until(visible((By.XPATH,'//*[@id="student-header"]/div[2]/ul/li[3]/header-button/alert-wrap/div/ng-transclude/div'))).click()
@@ -24,8 +27,17 @@ def script():
             level = wait.until(visible((By.XPATH,'//*[@id="livemathletics"]/body/div[1]/ui-view/div/level-selector-directive/div/div['+str(level)+']'))).click()
             cpu = wait.until(visible((By.XPATH,'//*[@id="livemathletics"]/body/div[1]/ui-view/div/div[4]/div/div[2]/button'))).click()
             go = wait.until(visible((By.XPATH,'//*[@id="livemathletics"]/body/div[1]/ui-view/div/div[4]/div/go-button/div/button[1]'))).click()
-            for i in range(35):
-                
+            for i in range(100):
+                if i % 1 == 0:
+                    end = datetime.datetime.now()
+                    duration = end - start
+                    f = open('times.txt','w')
+                    duration = str(duration).split(':')
+                    f.write(str(duration))
+                    f.write(' hours:'+str(duration[0]))
+                    f.write(' minutes:'+str(duration[1]))
+                    f.write(' seconds:'+str(duration[2].split('.')[0])+'\n')
+                    f.close()
                 for i in range(87):
                     time.sleep(.5)
                     txt = waitLonger.until(visible((By.XPATH,'//*[@id="livemathletics"]/body/div[1]/ui-view/div/div[1]/div[2]/div[2]/aligned-question/div/form/div')))
@@ -47,7 +59,7 @@ def script():
                             int(words)
                         except:
                             if words != 'Half':
-                                print('word problem')
+                                pass
                     #
                     
                     #Algebra
@@ -114,5 +126,20 @@ def script():
     except:
         print('dumbass error')
         return 2
-while True:
-    script()
+start = datetime.datetime.now()
+for i in range(50):
+    script(start)
+end = datetime.datetime.now()
+duration = end - start
+import sys
+try:
+    sys.exit(  )              # see also: os._exit, Tk(  ).quit(  )
+except SystemExit:
+    duration = str(duration).split(':')
+    print(duration)
+    print('hours: '+str(duration[0]))
+    print('minutes: '+str(duration[1]))
+    print('seconds: '+str(duration[2].split('.')[0]))
+# def dur():
+#     print(duration)
+# atexit.register()

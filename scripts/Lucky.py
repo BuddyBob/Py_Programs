@@ -15,9 +15,13 @@ while True:
     UserNumber = []
     count += 1
     guess = Guess(UserNumber)
-    if count % 100 == 0:
-        print(count)
-    if UserNumber == guess:
+    if count % 1000000 == 0:
+        zC = 0
+        for zeros in str(count):
+            if zeros == str(0):
+                zC += 1
+        print(f'{count} | zeros: ({zC})')
+    if number == guess:
         print('You won 1 million dollars: '+str(UserNumber))
         print('It took you'+str(count)+'tries!')
         break

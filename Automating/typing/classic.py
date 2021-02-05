@@ -30,7 +30,7 @@ for i in range(100):
                 #     inputBox = driver.find_element_by_xpath('/html/body/input').send_keys(words,Keys.ENTER)
                 # else:
                 inputBox = driver.find_element_by_xpath('/html/body/input').send_keys(words+' ')
-                time.sleep(.5)
+                time.sleep(.1)
                 
     except Exception as e:
         print(traceback.format_exc())

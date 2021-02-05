@@ -1,12 +1,10 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.keys import Keys
-import time
-driver = webdriver.Chrome(executable_path="/Users/test/Desktop/chromedriver")
-driver.get('https://www.mcrpg.com/kohi-click-test/')
-while True:
-    try:
-        driver.find_element_by_xpath('//*[@id="vue"]/button').click()
-    except Exception:
-        time.sleep(10)
+my_dict = {
+        "NaCl": 2.6,
+        "NaHCO3": 2.5,
+        "KCl": 1.5,
+        "Sugar": 13.5,
+    }
+newValues = []
+for key in my_dict:    
+    newValues.append(my_dict[key] *  2)
+print(newValues)

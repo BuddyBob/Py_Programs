@@ -2,12 +2,15 @@ import discord
 import random
 import sqlite3
 import traceback
+from urllib import request
+import json
 from discord.ext import  commands, tasks
 from itertools import cycle
+from keep_alive import  keep_alive
 client = commands.Bot(command_prefix = '.')
 
 status = cycle(['Eating Kids','Hurting myself','Being a bully','Making People Angry'])
-conn = sqlite3.connect('players.db')
+conn = sqlite3.connect('games.db')
 c = conn.cursor()
 
 
@@ -36,6 +39,9 @@ async def on_ready():
 async def ping(ctx):
     print(ping)
     await ctx.send('Pong! '+str(round(client.latency * 1000))+'ms')
+@client.command()
+async def chill(ctx):
+    await ctx.send('chill')
 
 #8ball
 @client.command(aliases = ['8ball'])
@@ -65,7 +71,7 @@ async def _8Ball(ctx,*,question:str):
 @_8Ball.error
 async  def _8Ball_error(ctx,error):
     if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send('Please pass in all required arguments \n(8ball,question)')
+        await ctx.send('Please pass in all required arguments \n(8ball,question:str)')
 
 
 #clear 
@@ -87,12 +93,143 @@ async def ban(ctx, member:discord.Member,*,reason=None):
     await member.ban(reason=reason)
     await ctx.send(f'Banned {member.mention}')
 
+
+
+@client.command()
+async def loginDog(ctx):
+    try:
+        c.execute("""CREATE TABLE dogs(
+                    name text,
+                    id integer,
+                    money integer,
+                    dogs integer,
+                    energy integer
+                )""") 
+    except:
+        pass
+
+    def ui(client_name,client_id):
+        c.execute("SELECT * FROM dogs WHERE name='{}' AND id='{}'".format(client_name,client_id))
+        user_info = c.fetchone()
+        return user_info
+
+
+    client_name = ctx.author.name
+    client_id = ctx.author.id
+    #fetch all 
+    with conn:
+        c.execute("SELECT * FROM dogs")
+        print('Database: '+str(c.fetchall()))
+    
+    #select all info from user; stored in user_info; print
+    user_info = ui(client_name,client_id)
+    print('user info:',user_info)
+    if user_info == None:
+        money = 0
+        dogs = 5
+        energy = 3
+        c.execute("INSERT INTO dogs VALUES (:name,:id,:money,:dogs,:energy)",{'name':client_name,'id':client_id,'money':money,'dogs':dogs,'energy':energy})
+        conn.commit()
+        user_info = ui(client_name,client_id)
+    embed = discord.Embed()
+    embed.set_author(name=f"__ Dog Stats - {client_name} __")
+    embed.add_field(name="Balance: " , value=user_info[2],inline=True)
+    embed.add_field(name="Dog Count: " , value=user_info[3],inline=True)
+    embed.add_field(name="Energy: " , value=user_info[4],inline=True)
+    await ctx.send(embed = embed)
+    @client.command(aliases = ['$'])
+    async def stats(ctx):
+        user_info = ui(client_name,client_id)
+        embed = discord.Embed()
+        embed.set_author(name=f"__ Dog Stats - {client_name} __")
+        embed.add_field(name="Balance: " , value=user_info[2],inline=True)
+        embed.add_field(name="Dog Count: " , value=user_info[3],inline=True)
+        embed.add_field(name="Energy: " , value=user_info[4],inline=True)
+        await ctx.send(embed = embed)
+    @client.command()
+    async def work(ctx):
+        user_info = ui(client_name,client_id)
+        e = user_info[4]
+        moneyOpt = [200] * 80 + [500] * 28 + [1000] * 5
+        if e >= 1:
+            gain = random.choice(moneyOpt)
+            await ctx.send(f'Your daily gain: **{gain}**')
+            m = user_info[2]
+            m += gain
+            e -= 1
+            print(e)
+            c.execute("UPDATE dogs SET money = :money, energy = :energy WHERE  name = :name AND id =  :id",{'money':m,'energy':e,'name':client_name,'id':client_id})
+            conn.commit()
+            user_info = ui(client_name,client_id)
+        else:
+            await ctx.send(f'You do not have enough **energy** to work. Try **farming** for energy')
+    @client.command()
+    async def farm(ctx,count = 1):
+        user_info = ui(client_name,client_id)
+        dogs =  user_info[3]
+        energy = user_info[4]
+        if count == 0:
+            await  ctx.send(f'Energy gained: {dogs} | Current Dog Supply: **0**')
+            energy += dogs
+            dogs = 0
+            c.execute("UPDATE dogs SET dogs = :dogs, energy = :energy WHERE  name = :name AND id =  :id",{'dogs':dogs,'energy':energy,'name':client_name,'id':client_id})
+            conn.commit()
+            user_info = ui(client_name,client_id)
+        elif dogs >= count:
+            await ctx.send(f'Energy gained: **{count}**  |  Current Dog Supply: **{dogs - count}**')
+        else:
+            await ctx.send(f'You dont have enough dogs for **{count}** energy gains | max possible: {dogs}')
+        for i in range(count):
+            energy += 1
+            dogs -= 1
+            c.execute("UPDATE dogs SET dogs = :dogs, energy = :energy WHERE  name = :name AND id =  :id",{'dogs':dogs,'energy':energy,'name':client_name,'id':client_id})
+            conn.commit()
+            user_info = ui(client_name,client_id)
+    @client.command()
+    async def buy(ctx,count = 1):
+        user_info = ui(client_name,client_id)
+        dogs =  user_info[3]
+        money = user_info[2]
+        dogCost = 100
+        if count == 0:
+            await ctx.send(f'You bought **{money/dogCost}** dogs | Bill: **{dogCost * (money/dogCost)}** | Balance: **{money-(dogCost*(money/dogCost))}**')
+            dogs += money/dogCost
+            money -= dogCost * (money/dogCost)
+            
+        elif money >= count * dogCost:
+            dogs += count
+            money -= dogCost*count
+            await ctx.send(f'You bought **{count}** dogs | Bill: **{dogCost * count}** | Balance: **{money}**')
+        else:
+            await ctx.send(f'You dont have enough money for **{count}** dogs | MaxCount: **{int(money/dogCost)}**')
+        c.execute("UPDATE dogs SET dogs = :dogs, money = :money WHERE  name = :name AND id =  :id",{'dogs':dogs,'money':money,'name':client_name,'id':client_id})
+        conn.commit()
+        user_info = ui(client_name,client_id)
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
 global loggedIn
 @client.command()
-async def login(ctx):
+async def loginMine(ctx):
     global money
     try:
-        c.execute("""CREATE TABLE players(
+        c.execute("""CREATE TABLE mine(
                     name text,
                     id integer,
                     money integer
@@ -109,18 +246,18 @@ async def login(ctx):
 
     #check database
     with conn:
-        c.execute("SELECT * FROM players")
+        c.execute("SELECT * FROM mine")
         print('Database: '+str(c.fetchall()))
 
     #check if user is located in db
-    c.execute("SELECT * FROM players WHERE name='{}' AND id='{}'".format(client_name,client_id))
+    c.execute("SELECT * FROM mine WHERE name='{}' AND id='{}'".format(client_name,client_id))
     user_info = c.fetchone()
     print('user info:',user_info)
 
     #Not in database
     if user_info == None:
         money = 0
-        c.execute("INSERT INTO players VALUES (:name,:id,:money)",{'name':client_name,'id':client_id,'money':money})
+        c.execute("INSERT INTO mine VALUES (:name,:id,:money)",{'name':client_name,'id':client_id,'money':money})
         conn.commit()
         await ctx.send(f'{client_name} balance: **{money}**')
     #User info in database
@@ -129,7 +266,7 @@ async def login(ctx):
         money = user_info[2]
         await ctx.send(f'{client_name} balance: **{money}**')
     with conn:
-        c.execute("SELECT * FROM players")
+        c.execute("SELECT * FROM mine")
         print('Database: '+str(c.fetchall()))
 
     #check
@@ -146,18 +283,18 @@ async def login(ctx):
         try:
             money = user_info[2]
         except:
-            c.execute("SELECT * FROM players WHERE name='{}' AND id='{}'".format(client_name,client_id))
+            c.execute("SELECT * FROM mine WHERE name='{}' AND id='{}'".format(client_name,client_id))
             user_info = c.fetchone()
             money = user_info[2]
         money += mined
         print(money)
-        c.execute("UPDATE players SET money = :money  WHERE  name = :name AND id =  :id",{'money':money,'name':client_name,'id':client_id})
+        c.execute("UPDATE mine SET money = :money  WHERE  name = :name AND id =  :id",{'money':money,'name':client_name,'id':client_id})
         conn.commit()
     @client.command()
     async def balance(ctx):
         client_name = ctx.author.name
         client_id = ctx.author.id
-        c.execute("SELECT * FROM players WHERE name='{}' AND id='{}'".format(client_name,client_id))
+        c.execute("SELECT * FROM mine WHERE name='{}' AND id='{}'".format(client_name,client_id))
         user_info = c.fetchone()
         money = user_info[2]
         await ctx.send(f'Your current balance: **{money}**')
@@ -166,7 +303,7 @@ async def login(ctx):
         client_name = ctx.author.name
         client_id = ctx.author.id
         moneyOpt = [10] * 80 + [100] * 28 + [1000] * 2
-        c.execute("SELECT * FROM players WHERE name='{}' AND id='{}'".format(client_name,client_id))
+        c.execute("SELECT * FROM mine WHERE name='{}' AND id='{}'".format(client_name,client_id))
         user_info = c.fetchone()
         print(user_info)
         money = user_info[2]
@@ -182,10 +319,10 @@ async def login(ctx):
                 total += mined
             money += total
             await ctx.send(f'you mined a total of ${total} dollars')
-            c.execute("UPDATE players SET money = :money  WHERE  name = :name AND id =  :id",{'money':money,'name':client_name,'id':client_id})
+            c.execute("UPDATE mine SET money = :money  WHERE  name = :name AND id =  :id",{'money':money,'name':client_name,'id':client_id})
             conn.commit()
         else:
-            c.execute("SELECT * FROM players WHERE name='{}' AND id='{}'".format(client_name,client_id))
+            c.execute("SELECT * FROM mine WHERE name='{}' AND id='{}'".format(client_name,client_id))
             user_info = c.fetchone()
             money = user_info[2]
             await ctx.send(f'Oof, looks like you dont have enough money\n| balance: **{money}**, you are short: **{automineCost-money}**, Max turns currently: **{int(money/100)}**|')
@@ -219,11 +356,11 @@ async def helpme(ctx):
     embed.set_author(name="Bot Commands - @AnEverything")
     embed.add_field(name="__Categories__", value='Enter .helpme then a category of your choice',inline=False)
     embed.add_field(name="Prefex: 🔣",value='=======')
-    embed.add_field(name="Mining: ⛏",value='=======')
-    embed.add_field(name="Moderate: 🚔",value='=======')
-    embed.add_field(name="Fun ✌",value="=======")
+    embed.add_field(name="Games: 🎮",value='=======')
+    embed.add_field(name="Moderate: 🤴",value='=======')
+    embed.add_field(name="Fun 👌",value="=======")
     msg = await ctx.send(embed = embed)
-    emoji =  ['🔣','⛏','🚔','✌']
+    emoji =  ['🔣','🎮','🤴','👌']
     for emo in emoji:
         await msg.add_reaction(emo)
     for emo in emoji:
@@ -242,11 +379,21 @@ async def helpme(ctx):
             await ctx.send(embed=embed)
         if str(rctn) == emoji[1]:
             embed.set_author(name="Bot Commands - @AnEverything")
-            embed.add_field(name="__Mining__",value = 'mining is a multiplayer game where you can mine for money',inline=True)
-            embed.add_field(name=".login", value="In order to access any of the games commands .login is crucial",inline=True)
+            embed.add_field(name="__Games__",value = 'mining is a multiplayer game where you can mine for money',inline=True)
+
+            embed.add_field(name="`{Mining game}`", value="This is a mining simulator game where you can mine for money",inline=False)
+            embed.add_field(name=".loginMining", value="In order to access any of the games commands .loginMine is crucial",inline=True)
             embed.add_field(name=".mine", value="Mining will add money to your balance. The amount of money per mine is not fixed.",inline=True)
             embed.add_field(name=".balance", value="Check your bank accounts current balance/money",inline=True)
             embed.add_field(name=".automine turns", value="Insert two values here (.automine, turns) This should mine x turns for you.\nThe default turns if not set is 20",inline=True)
+
+            embed.add_field(name='`{Dog Game}`', value="This is a dog game where you work every day waisting energy. Your dogs help you farm for energy. You can also by dogs whent they die",inline=False)
+            embed.add_field(name='.loginDog',value="In order to access any of the games commands .loginDog is crucial", inline=False)
+            embed.add_field(name='.work',value='Work for money | This reduces your energy by 2')
+            embed.add_field(name='.farm',value='Farming allows you to gain energy | You loose one dog per energy gained | second param = 0; max amount of energy')
+            embed.add_field(name='.buy',value='Allows you to buy more dogs for farming | param 2 = dog count; param 2 = 0;  max amount of dogs')
+            embed.add_field(name='.stats',value='Gives you your user_info')
+
             await ctx.send(embed=embed)
         if str(rctn) == emoji[2]:
             embed.set_author(name="Bot Commands - @AnEverything")
@@ -274,9 +421,71 @@ async  def mention_error(ctx,error):
     else:
         print(error)
 
+@client.command()
+async def joke(ctx):
+    url = 'http://official-joke-api.appspot.com/random_joke'
+    r = request.urlopen(url)
+    data = r.read()
+    jsonData = json.loads(data)
+    setup = jsonData["setup"]
+    punchline = jsonData["punchline"]
+
+    await ctx.send(setup)
+    await ctx.send(f'**||{punchline}||**')
+    
+@client.command()
+async def math(ctx):
+    author = ctx.message.author
+    embed = discord.Embed(
+        colour = discord.Colour.green()
+    )
+    embed.set_author(name="Math Categories")
+    embed.add_field(name="Addition: ➕",value='=======')
+    embed.add_field(name="Subtraction: ➖",value='=======')
+    embed.add_field(name="Multiplication: ✖",value='=======')
+    embed.add_field(name="Division ➗",value="=======")
+    
+    msg = await ctx.send(embed = embed)
+    emoji =  ['➕','➖','✖','➗']
+    for emo in emoji:
+        await msg.add_reaction(emo)
+    for emo in emoji:
+        def check(rctn, user):
+            if user.id == ctx.author.id and str(rctn) in emoji:
+                return 'reacted'
+        rctn, user = await client.wait_for("reaction_add", check=check)
+        chose = True
+        print(rctn)
+        if str(rctn) == '➕':
+            for i in range(10):
+                channel = ctx.channel
+                num1 = random.randint(1,100)
+                num2 = random.randint(1,100)
+                answer = num1 + num2
+                await ctx.send(f"Problem: **{num1} + {num2}**")
+                await ctx.send(f"peek **||{num1} + {num2} = {answer}||**")
+                try:
+                    @client.event
+                    async def on_message(message):
+                        msg = await client.wait_for('message', check=check(ctx.author,ctx.channel), timeout=30)
+                        print(ctx)
+                        print(ctx.content)
+                except Exception as e: 
+                    print(e)
+                    await ctx.send('you took too long!')
+                
+                # @client.event
+                # async def on_message(message):
+                #     isBot = message.author.bot
+                #     if isBot != True and message.content.startswith('a'):
+                #         if int(message.content[1:]) == int(answer):
+                #             print(message.content[1:])
+                #             await message.channel.send(f"**correct!**")
+                #         else:
+                #             await message.channel.send(f"**incorrect!**")
 
 
-
-client.run('ODAyNTg0NDkxMDI4Nzc0OTEy.YAxXDQ.F6GmpxKQLsmXAJOGiJrtyfz1M0s')
+keep_alive()
+client.run('ODAyNTg0NDkxMDI4Nzc0OTEy.YAxXDQ.RFPJLNmq1UbDhzzCPjJpKl0CPmg')
 conn.close()
 c.close()  

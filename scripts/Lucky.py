@@ -8,7 +8,8 @@ print('power ball: '+str(number))
 
 def Guess(UserNumber):
     for i in range(5):
-        num = random.randint(1,69)
+        num = random.randint(1,69
+        )
         UserNumber.append(num)
 count = 0
 while True:

@@ -1,10 +1,16 @@
-my_dict = {
-        "NaCl": 2.6,
-        "NaHCO3": 2.5,
-        "KCl": 1.5,
-        "Sugar": 13.5,
-    }
-newValues = []
-for key in my_dict:    
-    newValues.append(my_dict[key] *  2)
-print(newValues)
+s = "leetcode"
+words = ["leet", "code"]
+def wordSplit(s,words):
+	TakenWord = []
+	wordCountL = []
+	countWords = 0
+	for word in words:
+		wordCountL.append(len(word))
+		wordCountL = [sum(wordCountL)]
+		TakenWord.append(s[countWords:wordCountL[0]])
+		countWords += len(word)
+	if TakenWord == words:
+		return True
+	else:
+		return False
+print(wordSplit(s,words))

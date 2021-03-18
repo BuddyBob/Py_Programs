@@ -18,8 +18,8 @@ def script(start):
             waitLonger = WebDriverWait(driver, 100)
             visible = EC.visibility_of_element_located
             driver.get('https://login.mathletics.com/?_ga=2.60361444.876282730.1600105337-1065983887.1599670686&_gac=1.50132436.1600106071.Cj0KCQjwqfz6BRD8ARIsAIXQCf3LZK7GSetOE9YHfbj-cm2Z89tzZRmW-QwIs54eqhKvnkce6x8QB_oaAv_AEALw_wcB')
-            user = wait.until(visible((By.XPATH,'//*[@id="username"]'))).send_keys('username')
-            pwd = wait.until(visible((By.XPATH,'//*[@id="password"]'))).send_keys('pwd',Keys.ENTER)
+            user = wait.until(visible((By.XPATH,'//*[@id="username"]'))).send_keys('tha10696')
+            pwd = wait.until(visible((By.XPATH,'//*[@id="password"]'))).send_keys('water73',Keys.ENTER)
 
             play = wait.until(visible((By.XPATH,'//*[@id="student-header"]/div[2]/ul/li[3]/header-button/alert-wrap/div/ng-transclude/div'))).click()
             live = wait.until(visible((By.XPATH,'//*[@id="carousel-game-content"]/img'))).click()

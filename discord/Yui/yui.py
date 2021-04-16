@@ -187,24 +187,7 @@ async def loginDog(ctx):
         user_info = ui(client_name,client_id)
 
 
-
-
-        
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-global loggedIn
+global loggedIn`
 @client.command()
 async def loginMine(ctx):
     global money
@@ -412,7 +395,49 @@ async def joke(ctx):
 
     await ctx.send(setup)
     await ctx.send(f'**||{punchline}||**')
-    
+previous = [0]
+@client.command()
+async def stock(ctx,to_watch, ticker=2, returnOnChange=True):
+    author = ctx.message.author
+    from bs4 import BeautifulSoup as soup
+    from urllib.request import urlopen
+    from colorama import Fore, Back, Style
+    import numpy as np
+    import requests
+    import time
+    import os
+    global previous
+    totalPrices = []
+    prices = {}
+    def stockies(to_watch, ticker=2, returnOnChange=True):
+        global previous
+        def getPrice(to_watch):
+            client = urlopen(f'https://finance.yahoo.com/quote/{to_watch}')
+            pageSource = client.read()
+            client.close()
+            mixedSoup = soup(pageSource,"html.parser")
+            price = mixedSoup.findAll("span",{"class":"Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)"})
+            "Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(ib)"
+            pp = price[0].text.strip()
+            pp = pp.replace(',','')
+            return pp
+        stpp = getPrice(to_watch)
+        while True:
+            if previous[0] != stpp:
+                previous[0] = stpp
+                retStr = str(getPrice(to_watch))
+                return retStr
+            else:
+                getPrice(to_watch)
+    while True:
+        stockthingy = stockies(to_watch, ticker=ticker, returnOnChange=returnOnChange)
+        embed = discord.Embed(
+            colour = discord.Colour.green()
+        )
+        embed.set_author(name=to_watch)
+        embed.add_field(name="Stock Price:", value=stockthingy)
+        await ctx.send(embed=embed)
+
 @client.command()
 async def math(ctx):
     author = ctx.message.author

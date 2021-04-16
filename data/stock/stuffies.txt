@@ -1,0 +1,15 @@
+
+
+AMC
+[
+Change: 0.0
+Highest:10.24
+Lowest: 10.24
+]
+
+GME
+[
+Change: 0.0
+Highest:181.0
+Lowest: 181.0
+]

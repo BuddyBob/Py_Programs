@@ -1,22 +1,16 @@
 #This file was created just to read the file RecoveredStats and add up all the provinces to make only one 
 #List per country
-# On a level from 1 - 10 on how hard this task was I would rate it around 8
 from itertools import groupby
 from operator import add
 import json
 import operator
 def full(days,YourPath):
-    #First we will open Recovered,txt in read mode(We created this file in WriteDeaths.py)
     stats = open(str(YourPath)+'Covid-19/RecoveredCases/Recovered/Recovered.txt','r')
     #* I added this extra readline at the start to skip the first line which was a .csv header
     stats.readline()
-    #Create a simple list called L. This is a major list actually and play a huge part
     L = []
-    #Set country to a blank
     country = ''
-    #Iterate through the list
     for row in stats:
-        #I wrote lists into a file as strings. So now I have to turn each list into a list
         row = row.replace('\'','')
         row = row.replace(']','')
         row = row.replace('[','')
@@ -49,8 +43,6 @@ def full(days,YourPath):
         for tup in zip(*xss):
             country_totals[c].append(sum(tup))
 
-    #Now I have all the provinces stored into a variable called country total. To access the deaths for each country you can use json.dumps
-    #Instead of writing to a .txt file I just write it to a json file wich make everything much easier.
     sim = open(str(YourPath)+'Covid-19/RecoveredCases/Recovered/similar.json','w')
     sim.write(json.dumps(country_totals))
     sim.close()

@@ -29,10 +29,8 @@ class calculate:
             for i in range(len(self.dataset)):
                 currentnumber,count = self.dataset[i],0
                 for l in self.dataset:
-                    if l == currentnumber:
-                        count += 1
-                counts[currentnumber] = count
-            
+                    if l == currentnumber:count += 1
+                counts[currentnumber] = count 
             return [key for m in [max(counts.values())] for key,val in counts.items() if val == m]      
         def rangex(self,dataset):return str(self.dataset[-1]-self.dataset[0])
         def mad(self,dataset):

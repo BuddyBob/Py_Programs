@@ -1,1 +1,1 @@
-['0', '16', '42.180318'] hours:0 minutes:16 seconds:42
+['0', '00', '14.805182'] hours:0 minutes:00 seconds:14

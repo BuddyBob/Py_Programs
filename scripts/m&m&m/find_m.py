@@ -32,7 +32,7 @@ def mmm(numbers):
             Medians = numbers[final - 1]
             print('median: ',Medians) + 19 - 49.010
 
-
+mmm([20,25,30,30,35,45,50])
         
 
 

@@ -7,10 +7,12 @@ import sys
 #I used matplotlib for the graphing
 import  matplotlib.pyplot as plt
 import json
+import re
 def fullSECOND(YourPath):
     s = open('/Users/aspera/Documents/python/Py_Programs/Covid-19/setting.json')
     setting = json.load(s)
     gridd = setting["Grid"]
+    print(gridd)
     CountryMax = setting["CountryMax"]
     GraphColor = setting["GraphColor"]
     TitleSize = setting["TitleSize"]

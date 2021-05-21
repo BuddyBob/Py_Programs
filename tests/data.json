@@ -1,0 +1,9 @@
+{
+    "_id": {
+    "$oid": "5e7511c45cb29ef48b8cfcff"
+    },
+    "about": "some text",
+    "creationDate": {
+    "$date": "2021-01-05T14:59:58.046Z"
+    }
+  }

@@ -1,0 +1,3 @@
+[submodule "games/Impossible_Snake_Game"]
+	path = games/Impossible_Snake_Game
+	url = https://github.com/BuddyBob/Impossible_Snake_Game.git

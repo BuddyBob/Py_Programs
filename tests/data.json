@@ -1,0 +1,119 @@
+{
+    "Class 1 args": {
+        "prefix": "csg1",
+        "description": "Class template for 1 arguments",
+        "body": [
+            "class {1:Name}",
+            "\tdef __init__(self,${2:arg1})",
+            "\t\tself.$2 = $2"
+        ]
+    },
+    "Class 2 args": {
+        "prefix": "csg2",
+        "description": "Class template for 2 arguments",
+        "body": [
+            "class {1:Name}",
+            "\tdef __init__(self,${2:arg1}, ${3:arg2})",
+            "\t\tself.$2 = $2",
+            "\t\tself.$3 = $3"
+        ]
+    },
+    "Class 3 args": {
+        "prefix": "csg3",
+        "description": "Class template for 3 arguments",
+        "body": [
+            "class {1:Name}",
+            "\tdef __init__(self,${2:arg1}, ${3:arg2}, ${4:arg3})",
+            "\t\tself.$2 = $2",
+            "\t\tself.$3 = $3",
+            "\t\tself.$4 = $4"
+        ]
+    },
+    "Class 4 args": {
+        "prefix": "csg4",
+        "description": "Class template for 4 arguments",
+        "body": [
+            "class {1:Name}",
+            "\tdef __init__(self,${2:arg1}, ${3:arg2}, ${4:arg3}, ${5:arg4})",
+            "\t\tself.$2 = $2",
+            "\t\tself.$3 = $3",
+            "\t\tself.$4 = $4",
+            "\t\tself.$5 = $5"
+        ]
+    },
+    "Class 5 args": {
+        "prefix": "csg5",
+        "description": "Class template for 5 arguments",
+        "body": [
+            "class {1:Name}",
+            "\tdef __init__(self,${2:arg1}, ${3:arg2}, ${4:arg3}, ${5:arg4}, ${6:arg5})",
+            "\t\tself.$2 = $2",
+            "\t\tself.$3 = $3",
+            "\t\tself.$4 = $4",
+            "\t\tself.$5 = $5",
+            "\t\tself.$6 = $6"
+        ]
+    },
+    "Class 6 args": {
+        "prefix": "csg6",
+        "description": "Class template for 6 arguments",
+        "body": [
+            "class {1:Name}",
+            "\tdef __init__(self,${2:arg1}, ${3:arg2}, ${4:arg3}, ${5:arg4}, ${6:arg5}, ${7:arg6})",
+            "\t\tself.$2 = $2",
+            "\t\tself.$3 = $3",
+            "\t\tself.$4 = $4",
+            "\t\tself.$5 = $5",
+            "\t\tself.$6 = $6",
+            "\t\tself.$7 = $7"
+        ]
+    },
+    "Class 7 args": {
+        "prefix": "csg7",
+        "description": "Class template for 7 arguments",
+        "body": [
+            "class {1:Name}",
+            "\tdef __init__(self,${2:arg1}, ${3:arg2}, ${4:arg3}, ${5:arg4}, ${6:arg5}, ${7:arg6}, ${8:arg7})",
+            "\t\tself.$2 = $2",
+            "\t\tself.$3 = $3",
+            "\t\tself.$4 = $4",
+            "\t\tself.$5 = $5",
+            "\t\tself.$6 = $6",
+            "\t\tself.$7 = $7",
+            "\t\tself.$8 = $8"
+        ]
+    },
+    "Class 8 args": {
+        "prefix": "csg8",
+        "description": "Class template for 8 arguments",
+        "body": [
+            "class {1:Name}",
+            "\tdef __init__(self,${2:arg1}, ${3:arg2}, ${4:arg3}, ${5:arg4}, ${6:arg5}, ${7:arg6}, ${8:arg7}, ${9:arg8})",
+            "\t\tself.$2 = $2",
+            "\t\tself.$3 = $3",
+            "\t\tself.$4 = $4",
+            "\t\tself.$5 = $5",
+            "\t\tself.$6 = $6",
+            "\t\tself.$7 = $7",
+            "\t\tself.$8 = $8",
+            "\t\tself.$9 = $9"
+        ]
+    },
+    "Class 9 args": {
+        "prefix": "csg9",
+        "description": "Class template for 9 arguments",
+        "body": [
+            "class {1:Name}",
+            "\tdef __init__(self,${2:arg1}, ${3:arg2}, ${4:arg3}, ${5:arg4}, ${6:arg5}, ${7:arg6}, ${8:arg7}, ${9:arg8}, ${10:arg9})",
+            "\t\tself.$2 = $2",
+            "\t\tself.$3 = $3",
+            "\t\tself.$4 = $4",
+            "\t\tself.$5 = $5",
+            "\t\tself.$6 = $6",
+            "\t\tself.$7 = $7",
+            "\t\tself.$8 = $8",
+            "\t\tself.$9 = $9",
+            "\t\tself.$10 = $10"
+        ]
+    }
+}

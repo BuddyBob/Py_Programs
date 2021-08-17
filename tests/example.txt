@@ -1,0 +1,3 @@
+key_inv_single = ['invoice'] 
+key_inv_number = ['invoice number', 'invoice no', 'invoice #', 'invoice#'] 
+key_inv_date = ['invoice date', 'invoice dt', 'issue date', 'date of invoice', 'date of issue', 'issue dt', 'dt of issue'] 
